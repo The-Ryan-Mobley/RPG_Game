@@ -2,62 +2,83 @@ class dude{
     constructor(){
         this.multiplier =1;
         this.is_player = false;
-        this.health = 100;
-        this.attack = 20;
-        this.counter_attack = 20;
+        this.health = 0;
+        this.attack = 0;
+        this.counter_attack = 0;
+        this.profession="";
         this.area = "pool";
         this.in_combat="false";
+        this.pic = new Image();
+        this.assignprofession();
     }
-    strong(){
-        this.attack = Math.floor(Math.random() * 70) + 30;
-    }
-    weak(){
-        this.attack = Math.floor(Math.random()* 40) + 10;
-    }
-    chonk(){
-        this.health = Math.floor(Math.random() * 250) + 120;
-    }
-    soft(){
-        this.health = Math.floor(Math.random() * 100) + 50;
-    }
-    parry(){
-        this.counter_attack = Math.floor(Math.random() * 60) + 30;
-    }
-    distracted(){
-        this.counter_attack = Math.floor(Math.random() * 45) + 5;
-    }
-    assign_attributes(){
-        if(this.is_player === true){ //player needs better variations
-            this.chonk();
-            this.strong();
-            this.parry();
+    assignprofession(){
+        var list =["fighter", "wizard", "rogue", "ranger", "warlock", "cleric"];
+        this.profession= list[Math.floor(Math.random()* list.length)];
+       
+        switch(this.profession.toLowerCase()){
+            case "fighter":{
+                this.health = 90;
+                this.attack=30;
+                this.counter_attack=30;
+                this.pic.src = "assets/images/Tordek.jpg";
+                break;
+            }
+            case "wizard":{
+                this.health=70;
+                this.attack=50;
+                this.counter=30;
+                this.pic.src = "assets/images/dnd-wizard.jpg";
+                break;
+            }
+            case "warlock":{
+                this.health=60;
+                this.attack=60;
+                this.counter_attack=60;
+                this.pic.src ="assets/images/c1034.png";
+                break;
+            }
+            case "rogue":{
+                this.health=70;
+                this.attack=30;
+                this.counter_attack=50;
+                this.pic.src = "assets/images/Arcane_trickster_wand.jpg";
+                break;
+            }
+            case "ranger":{
+                this.health = 80;
+                this.attack =40;
+                this.counter_attack =40;
+                this.pic.src = "assets/images/dnd-class-ranger-195x300.png";
+                break;
+            }
+            case "cleric":{
+                this.health = 120;
+                this.attack = 10;
+                this.counter_attack =20;
+                this.pic.src = "assets/images/Dnd-3.5-cleric-209x300.jpg";
+                break;
+            }
         }
-        else{
-            let healthroll = Math.floor(Math.random() * 100);
-            let counterroll = Math.floor(Math.random() * 100);
-            if(healthroll >= 75){
-                this.chonk();
-            }
-            else{
-                this.soft();
-            }
-            if(counterroll >= 60){
-                this.parry();
-            }
-            else{
-                this.distracted();
-            }
 
-        }
+
     }
     
 }
 function attack(a,d){
     if(a.isplayer === true){
-        let basepower = a.attack;
         d.health -= a.attack * a.multiplier;
         a.health -= d.counterattack;
         a.multiplier++;
     }
     
 }
+
+$(document).ready(function(){
+    var playerselected = false;
+    var mydude = new dude();
+
+});
+
+
+
+//mydude.assignprofession();
