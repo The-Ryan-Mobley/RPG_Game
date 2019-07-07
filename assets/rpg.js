@@ -75,7 +75,18 @@ function attack(a,d){
 
 $(document).ready(function(){
     var playerselected = false;
-    var mydude = new dude();
+    var dudelist =[];
+    for(let i=0; i < 5; i++){
+         mydude = new dude();
+         dudelist.push(mydude);
+
+    }
+    
+    var spawn = $("playerarea");
+    var pool = $("opponentarea");
+    $(".fightbutton").click(function(){
+
+    });
 
 });
 
