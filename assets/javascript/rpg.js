@@ -34,7 +34,7 @@ class dude{
                 this.health=60;
                 this.attack=60;
                 this.counter_attack=60;
-                this.pic.src ="assets/images/dnd-class-paladin-300x287.png";
+                this.pic.src ="assets/images/c1034.png";
                 break;
             }
             case "rogue":{
@@ -48,7 +48,7 @@ class dude{
                 this.health = 80;
                 this.attack =40;
                 this.counter_attack =40;
-                this.pic.src = "assets/images/300px-Pack_Lord_Druid.jpg";
+                this.pic.src = "images/300px-Pack_Lord_Druid.jpg";
                 break;
             }
             case "cleric":{
@@ -74,17 +74,26 @@ function attack(a,d){
 }
 
 $(document).ready(function(){
-    var spawn = $("playerarea");
-    var pool = $("opponentarea");
+    var spawn = $(".player-area");
+    var pool = $(".opponent-area");
     var playerselected = false;
     var dudelist =[];
+    
     for(let i=0; i < 5; i++){
+        
+
         mydude = new dude();
+        
         dudelist.push(mydude);
+        
+        
         var character = $('<img id="generated">');
+       
         character.addClass("img-fluid");
-        character.attr('src', dudelist[i].pic);
+        character.attr("src", dudelist[i].pic);
+        
         character.appendTo(spawn);
+      
         
 
     }
