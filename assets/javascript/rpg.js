@@ -48,7 +48,7 @@ class dude{
                 this.health = 80;
                 this.attack =40;
                 this.counter_attack =40;
-                this.pic.src = "images/300px-Pack_Lord_Druid.jpg";
+                this.pic.src = "assets/images/dnd-class-ranger-195x300.png";
                 break;
             }
             case "cleric":{
@@ -77,28 +77,29 @@ $(document).ready(function(){
     var spawn = $(".player-area");
     var pool = $(".opponent-area");
     var playerselected = false;
-    var dudelist =[];
+    //var dudelist =[];
     
-    for(let i=0; i < 5; i++){
-        
-
+    for(let i=0; i < 4; i++){
         mydude = new dude();
-        
-        dudelist.push(mydude);
-        
-        
-        var character = $('<img id="generated">');
-       
-        character.addClass("img-fluid");
-        character.attr("src", dudelist[i].pic);
-        
+        //dudelist.push(mydude);  
+        var character = $('<img>');
+        character.addClass("img-fluid generated");
+        character.attr("src", mydude.pic.src);
+        character.data(mydude);
+        character.width(250);
+        character.height(250);
         character.appendTo(spawn);
-      
-        
-
     }
     
-    
+    $(".generated").click(function(){
+        if(playerselected === false){
+            mydude.is_player = true;
+            playerselected = true;
+            console.log(mydude.profession + "selected");
+        }
+
+    })
+
     $(".fightbutton").click(function(){
 
     });
