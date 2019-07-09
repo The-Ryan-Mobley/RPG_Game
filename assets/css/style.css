@@ -8,3 +8,23 @@
     border-color: red;
     border-width: 1%;
 }
+.characterholder{
+    width: 150px;
+    height: 150px;
+    float: left;
+}
+.health-text{
+    position:absolute;
+    bottom:1%;
+    left:1%;
+}
+.attack-text{
+    position:absolute;
+    bottom:1%;
+    text-align:center;
+}
+.counter-text{
+    position:absolute;
+    bottom:1%;
+    right:1%;
+}

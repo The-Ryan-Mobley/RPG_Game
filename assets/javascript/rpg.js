@@ -131,19 +131,37 @@ $(document).ready(function () {
     }
 
     for (let i = 0; i < 4; i++) {
-        dudelist[i] = new dude();
-        var character = $('<img>');
-        character.addClass("img-fluid not-player");
+        dudelist[i] = new dude(); //creates class values that stores character stats
+
+
+        var characterholder = $("<div>"); //the container for character elements
+        characterholder.addClass("characterholder not-player");
+        characterholder.attr("id", i);
+        characterholder.appendTo(spawn);
+        characterholder.data("stats", dudelist[i]);
+
+        var character = $('<img>'); //character images
+        character.addClass("img-fluid ");
         character.attr("src", dudelist[i].pic.src);
-        character.attr("id", i);
-        character.data("stats", dudelist[i]);
         character.width(150);
         character.height(150);
         characterlist.push(character);
-        character.appendTo(spawn);
+        character.appendTo(characterholder);
+
+        //stat text
+        var character_hp = $('<p class="health-text">');
+        var character_attack = $('<p class="attack-text">');
+        var character_counter = $('<p class="counter-text">');
+        character_hp.appendTo(characterholder);
+        character_hp.text("\u2665 " + dudelist[i].health);
+        character_attack.appendTo(characterholder);
+        character_attack.text("\u2694 " + dudelist[i].attack);
+        character_counter.appendTo(characterholder);
+        character_counter.text("\u2638 " + dudelist[i].counter_attack);
+        
 
     }
-    heading.text("CHOOSE YOU'RE CHARACTER");
+    heading.text("CHOOSE YOUR CHARACTER");
     heading.appendTo(toptext);
 
 
