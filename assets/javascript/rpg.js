@@ -116,11 +116,11 @@ $(document).ready(function () {
             b.detach();
             heading.text("YOU DIED");
         }
-        if(a.data("stats").health <= 0){
+        else if(a.data("stats").health <= 0){
             a.detach();
             heading.text("YOU DIED");
         }
-        if(b.data("stats").health <= 0){
+        else if(b.data("stats").health <= 0){
             b.detach();
             opponent_in_zone = false;
             heading.text("YOU WON SELECT A NEW OPPONENT");
