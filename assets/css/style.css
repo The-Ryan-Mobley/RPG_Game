@@ -17,21 +17,21 @@
     position:relative;
     float:left;
     padding-right:1%;
-    bottom:1%;
+    bottom:10%;
     left:1%;
 }
 .attack-text{
     position:relative;
     float:left;
     padding-right:1%;
-    bottom:1%;
+    bottom:10%;
     
 }
 .counter-text{
     position: relative;
     float:left;
     padding-right:1%;
-    bottom:1%;
+    bottom:10%;
     right:1%;
 }
 .player-area{

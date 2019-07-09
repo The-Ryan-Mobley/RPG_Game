@@ -103,14 +103,10 @@ $(document).ready(function () {
 
     function combat(a, b) {
 
-        console.log("health: " + b.data("stats").health);
         (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
         (a.data("stats").health) -= (b.data("stats").counter_attack);
-        console.log(((a.data("stats").attack) * (a.data("stats").multiplier)));
-        console.log("health left: " + b.data("stats").health);
-        console.log("player health: " + a.data("stats").health);
         a.data("stats").multiplier++;
-        console.log(a.data("stats").multiplier);
+        
         if((a.data("stats").health <= 0) && (b.data("stats").health <= 0)){
             a.detach();
             b.detach();
@@ -129,6 +125,8 @@ $(document).ready(function () {
         
 
     }
+    
+
 
     for (let i = 0; i < 4; i++) {
         dudelist[i] = new dude(); //creates class values that stores character stats
@@ -153,11 +151,15 @@ $(document).ready(function () {
         var character_attack = $('<p class="attack-text">');
         var character_counter = $('<p class="counter-text">');
         character_hp.appendTo(characterholder);
-        character_hp.text("\u2665 " + dudelist[i].health);
+        character_hp.text("\uD83E\uDDE1 " + dudelist[i].health);
+        character_hp.data("hp", dudelist[i].health);
+        character_hp.addClass(i);
         character_attack.appendTo(characterholder);
         character_attack.text("\u2694 " + dudelist[i].attack);
+        character_attack.data("attack", dudelist[i].attack);
         character_counter.appendTo(characterholder);
         character_counter.text("\u2638 " + dudelist[i].counter_attack);
+        character_counter.data("attack", dudelist[i].counter_attack);
         
 
     }
@@ -169,6 +171,11 @@ $(document).ready(function () {
     var character_one = $("#1");
     var character_two = $("#2");
     var character_three = $("#3");
+    var health_zero = $(".0");
+    var health_one = $(".1");
+    var health_two = $(".2");
+    var health_three = $(".3");
+    
 
     character_zero.click(function () {
 
