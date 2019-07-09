@@ -7,7 +7,6 @@ class dude {
         this.counter_attack = 0;
         this.profession = "";
         this.area = "pool";
-        this.in_combat = "false";
         this.pic = new Image();
         this.assignprofession();
     }
@@ -65,50 +64,120 @@ class dude {
 
 }
 
-function attack(a, d) {
-    if (a.isplayer === true) {
-        d.health -= a.attack * a.multiplier;
-        a.health -= d.counterattack;
-        a.multiplier++;
-    }
 
-}
 
 $(document).ready(function () {
+    var toptext = $(".announcer");
+    var heading = $("<h1>");
     var spawn = $(".player-area");
     var pool = $(".opponent-area");
     var playerselected = false;
-    //var dudelist =[];
+    var opponent_in_zone = false;
+    var dudelist = [];
+    var characterlist = [];
 
-    for (let i = 0; i < 4; i++) {
-        mydude = new dude();
-        //dudelist.push(mydude);  
-        var character = $('<img>');
-        character.addClass("img-fluid not-player");
-        character.attr("src", mydude.pic.src);
-        character.attr("id", "object");
-        character.data(mydude);
-        character.width(250);
-        character.height(250);
-        character.appendTo(spawn);
+
+    function player_selected(element) {
+
+        element.data("stats").is_player = true;
+        playerselected = true;
+        element.removeClass("not-player");
+        element.addClass("player-character");
+        var opponent = $(".not-player").detach();
+        opponent.appendTo(pool);
+        heading.text("PLAYING AS: " + element.data("stats").profession + "! NOW CHOOSE AN OPPONENT!");
+
     }
 
-    $(".generated").click(function () {
+    function opponent_selected(element) {
+        if (element.data("stats").is_player === false) {
+            element.addClass("picked");
+            element.detach();
+            element.appendTo($(".opponent-selected"));
+            heading.text("ATTACKING : " + element.data("stats").profession);
+            opponent_in_zone = true;
+        }
+
+    }
+
+    function combat(a, b) {
+
+        console.log("health: " + b.data("stats").health);
+        (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
+        (a.data("stats").health) -= (b.data("stats").counterattack);
+        console.log(((a.data("stats").attack) * (a.data("stats").multiplier)));
+        console.log("health left: " + b.data("stats").health);
+        a.data("stats").multiplier++;
+        console.log(a.data("stats").multiplier);
+
+    }
+
+    for (let i = 0; i < 4; i++) {
+        dudelist[i] = new dude();
+        var character = $('<img>');
+        character.addClass("img-fluid not-player");
+        character.attr("src", dudelist[i].pic.src);
+        character.attr("id", i);
+        character.data("stats", dudelist[i]);
+        character.width(150);
+        character.height(150);
+        characterlist.push(character);
+        character.appendTo(spawn);
+
+    }
+    heading.text("CHOOSE YOU'RE CHARACTER");
+    heading.appendTo(toptext);
+
+
+    var character_zero = $("#0");
+    var character_one = $("#1");
+    var character_two = $("#2");
+    var character_three = $("#3");
+
+    character_zero.click(function () {
+
         if (playerselected === false) {
-            mydude.is_player = true;
-            playerselected = true;
-            character.removeClass("not-player");
-            character.addClass("player-character");
+            player_selected(character_zero);
         }
-        if (character.hasClass("not-player")) {
-            character.appendTo(pool);
-
+        if ((playerselected === true) && (opponent_in_zone === false)) {
+            opponent_selected(character_zero);
         }
+    })
+    character_one.click(function () {
 
+        if (playerselected === false) {
+            player_selected(character_one);
+        }
+        if ((playerselected === true) && (opponent_in_zone === false)) {
+            opponent_selected(character_one);
+        }
+    })
+    character_two.click(function () {
 
+        if (playerselected === false) {
+            player_selected(character_two);
+        }
+        if ((playerselected === true) && (opponent_in_zone === false)) {
+            opponent_selected(character_two);
+        }
+    })
+    character_three.click(function () {
+
+        if (playerselected === false) {
+            player_selected(character_three);
+        }
+        if ((playerselected === true) && (opponent_in_zone === false)) {
+            opponent_selected(character_three);
+        }
     })
 
     $(".fightbutton").click(function () {
+        let fighter_one = $(".player-character");
+        let fighter_two = $(".picked");
+        if (opponent_in_zone === true) {
+            combat(fighter_one, fighter_two);
+        }
+
 
     });
 
