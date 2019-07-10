@@ -113,9 +113,17 @@ $(document).ready(function () {
     }
 
     function deal_damage(a, b) {
-        (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
-        (a.data("stats").health) -= (b.data("stats").counter_attack);
-        a.data("stats").multiplier++;
+        if((combat_round === 0) && (a.data("stats").profession === "ranger")){
+            (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
+            a.data("stats").multiplier++;
+            
+
+        }else{
+            (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
+            (a.data("stats").health) -= (b.data("stats").counter_attack);
+            a.data("stats").multiplier++;
+        }
+        
     }
 
     function update_health(character_object) {
@@ -270,9 +278,10 @@ $(document).ready(function () {
         let fighter_one = $(".player-character");
         let fighter_two = $(".picked");
         
-        combat_round++;
         if (opponent_in_zone === true) {
             combat(fighter_one, fighter_two);
+            combat_round++;
+            //console.log(combat_round);
         }
     });
 });
