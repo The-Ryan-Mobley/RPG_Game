@@ -106,7 +106,8 @@ $(document).ready(function () {
         (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
         (a.data("stats").health) -= (b.data("stats").counter_attack);
         a.data("stats").multiplier++;
-        a_hp = a.find(".health-text");
+        let a_hp = a.find(".health-text");
+        let b_hp = b.find(".health-text");
         a_hp.text("\uD83E\uDDE1 " + a.data("stats").health);
         b_hp.text("\uD83E\uDDE1 " + b.data("stats").health);
         if((a.data("stats").health <= 0) && (b.data("stats").health <= 0)){
