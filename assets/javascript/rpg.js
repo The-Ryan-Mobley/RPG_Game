@@ -76,6 +76,7 @@ $(document).ready(function () {
     var opponent_in_zone = false;
     var dudelist = [];
     var characterlist = [];
+    var combat_round = 0;
 
 
     function player_selected(element) {
@@ -102,60 +103,83 @@ $(document).ready(function () {
     }
 
     function combat(a, b) {
-        deal_damage(a,b);
+        deal_damage(a, b);
 
         update_health(a);
         update_health(b);
 
-        death_conditions(a,b);
-        
+        death_conditions(a, b);
+
     }
-    function deal_damage(a,b){
+
+    function deal_damage(a, b) {
         (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
         (a.data("stats").health) -= (b.data("stats").counter_attack);
         a.data("stats").multiplier++;
     }
-    function update_health(character_object){
+
+    function update_health(character_object) {
         let co_hp = character_object.find(".health-text");
         co_hp.text("\uD83E\uDDE1 " + character_object.data("stats").health);
 
     }
-    function death_conditions(a,b){
-        if((a.data("stats").health <= 0) && (b.data("stats").health <= 0)){
-            a.detach();
-            b.detach();
-            heading.text("YOU DIED");
-        }
-        else if(a.data("stats").health <= 0){
-            a.detach();
-            heading.text("YOU DIED");
-        }
-        else if(b.data("stats").health <= 0){
-            b.detach();
-            opponent_in_zone = false;
-            heading.text("YOU WON SELECT A NEW OPPONENT");
 
+    function death_conditions(a, b) {
+        if ((a.data("stats").profession === "fighter") && (a.data("stats").abilit_power === true)){
+            if (a.data("stats").health <= 0){
+                a.data("stats").health = 1;
+                a.data("stats").abilit_power = false;
+                update_health(a);
+            }else if (b.data("stats").health <= 0) {
+                b.detach();
+                opponent_in_zone = false;
+                heading.text("YOU WON SELECT A NEW OPPONENT");
+                combat_round =0;
+
+            }
+        }
+        else
+        {
+            if ((a.data("stats").health <= 0) && (b.data("stats").health <= 0)) {
+                a.detach();
+                b.detach();
+                heading.text("YOU DIED");
+                combat_round =0;
+            } else if (a.data("stats").health <= 0) {
+                a.detach();
+                heading.text("YOU DIED");
+                combat_round =0;
+            } else if (b.data("stats").health <= 0) {
+                b.detach();
+                opponent_in_zone = false;
+                heading.text("YOU WON SELECT A NEW OPPONENT");
+                combat_round =0;
+
+            }
         }
     }
-    function draw_characters(index, object, object_image, element){
-        
+
+    function draw_characters(index, object, object_image, element) {
+
         var characterholder = $("<div>"); //the container for character elements
-        generate_container(characterholder,index, element, object);
-        
+        generate_container(characterholder, index, element, object);
+
         var character = $('<img>'); //character images
         generate_pic(object_image, characterholder, character);
-        
-        draw_stats(characterholder,object.health,object.attack,object.counter_attack);
+
+        draw_stats(characterholder, object.health, object.attack, object.counter_attack);
 
     }
-    function generate_container(holder, index, element, object){
+
+    function generate_container(holder, index, element, object) {
         holder.addClass("characterholder not-player");
         holder.attr("id", index);
         holder.appendTo(element);
         holder.data("stats", object);
 
     }
-    function generate_pic(object_image, holder, character){
+
+    function generate_pic(object_image, holder, character) {
         character.addClass("img-fluid ");
         character.attr("src", object_image.src);
         character.width(150);
@@ -164,7 +188,8 @@ $(document).ready(function () {
         character.appendTo(holder);
 
     }
-    function draw_stats(parent,health_stat,attack_stat,counter_stat){
+
+    function draw_stats(parent, health_stat, attack_stat, counter_stat) {
         var character_hp = $('<p class="health-text">');
         var character_attack = $('<p class="attack-text">');
         var character_counter = $('<p class="counter-text">');
@@ -194,63 +219,60 @@ $(document).ready(function () {
     var character_one = $("#1");
     var character_two = $("#2");
     var character_three = $("#3");
-    
+
 
     character_zero.click(function () {
 
         if (playerselected === false) {
             player_selected(character_zero);
-         
+
         }
         if ((playerselected === true) && (opponent_in_zone === false)) {
             opponent_selected(character_zero);
-        
+
         }
     })
     character_one.click(function () {
 
         if (playerselected === false) {
             player_selected(character_one);
-           
+
         }
         if ((playerselected === true) && (opponent_in_zone === false)) {
             opponent_selected(character_one);
-          
+
         }
     })
     character_two.click(function () {
 
         if (playerselected === false) {
             player_selected(character_two);
-     
+
         }
         if ((playerselected === true) && (opponent_in_zone === false)) {
             opponent_selected(character_two);
-            
+
         }
     })
     character_three.click(function () {
 
         if (playerselected === false) {
             player_selected(character_three);
-       
+
         }
         if ((playerselected === true) && (opponent_in_zone === false)) {
             opponent_selected(character_three);
-          
+
         }
     })
 
     $(".fightbutton").click(function () {
         let fighter_one = $(".player-character");
         let fighter_two = $(".picked");
-        let health_fighter_one = $(".player-health");
-        let health_fighter_two = $(".opponent-health");
+        
+        combat_round++;
         if (opponent_in_zone === true) {
             combat(fighter_one, fighter_two);
         }
     });
 });
-
-
-
