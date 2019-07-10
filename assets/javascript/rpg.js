@@ -128,47 +128,53 @@ $(document).ready(function () {
         
 
     }
-    function update_health(a,b){
-        console.log("yo");
-        a.text("\uD83E\uDDE1 " + a.data("hp"));
-        b.text("\uD83E\uDDE1 " + b.data("hp"));
+    function draw_characters(index, object, object_image, element){
+        
+        var characterholder = $("<div>"); //the container for character elements
+        generate_container(characterholder,index, element, object);
+        
+        var character = $('<img>'); //character images
+        generate_pic(object_image, characterholder, character);
+        
+        draw_stats(characterholder,object.health,object.attack,object.counter_attack);
+
     }
-    
+    function generate_container(holder, index, element, object){
+        holder.addClass("characterholder not-player");
+        holder.attr("id", index);
+        holder.appendTo(element);
+        holder.data("stats", object);
+
+    }
+    function generate_pic(object_image, holder, character){
+        character.addClass("img-fluid ");
+        character.attr("src", object_image.src);
+        character.width(150);
+        character.height(150);
+        characterlist.push(character);
+        character.appendTo(holder);
+
+    }
+    function draw_stats(parent,health_stat,attack_stat,counter_stat){
+        var character_hp = $('<p class="health-text">');
+        var character_attack = $('<p class="attack-text">');
+        var character_counter = $('<p class="counter-text">');
+        character_hp.appendTo(parent);
+        character_hp.text("\uD83E\uDDE1 " + health_stat);
+        character_hp.data("hp", health_stat);
+        character_attack.appendTo(parent);
+        character_attack.text("\u2694 " + attack_stat);
+        character_attack.data("attack", attack_stat);
+        character_counter.appendTo(parent);
+        character_counter.text("\u2638 " + counter_stat);
+        character_counter.data("attack", counter_stat);
+
+    }
 
 
     for (let i = 0; i < 4; i++) {
         dudelist[i] = new dude(); //creates class values that stores character stats
-
-
-        var characterholder = $("<div>"); //the container for character elements
-        characterholder.addClass("characterholder not-player");
-        characterholder.attr("id", i);
-        characterholder.appendTo(spawn);
-        characterholder.data("stats", dudelist[i]);
-
-        var character = $('<img>'); //character images
-        character.addClass("img-fluid ");
-        character.attr("src", dudelist[i].pic.src);
-        character.width(150);
-        character.height(150);
-        characterlist.push(character);
-        character.appendTo(characterholder);
-
-        //stat text
-        var character_hp = $('<p class="health-text">');
-        var character_attack = $('<p class="attack-text">');
-        var character_counter = $('<p class="counter-text">');
-        character_hp.appendTo(characterholder);
-        character_hp.text("\uD83E\uDDE1 " + dudelist[i].health);
-        character_hp.data("hp", dudelist[i].health);
-        character_hp.addClass(i);
-        character_attack.appendTo(characterholder);
-        character_attack.text("\u2694 " + dudelist[i].attack);
-        character_attack.data("attack", dudelist[i].attack);
-        character_counter.appendTo(characterholder);
-        character_counter.text("\u2638 " + dudelist[i].counter_attack);
-        character_counter.data("attack", dudelist[i].counter_attack);
-        
+        draw_characters(i, dudelist[i], dudelist[i].pic, spawn);
 
     }
     heading.text("CHOOSE YOUR CHARACTER");
@@ -179,54 +185,50 @@ $(document).ready(function () {
     var character_one = $("#1");
     var character_two = $("#2");
     var character_three = $("#3");
-    var health_zero = $(".0");
-    var health_one = $(".1");
-    var health_two = $(".2");
-    var health_three = $(".3");
     
 
     character_zero.click(function () {
 
         if (playerselected === false) {
             player_selected(character_zero);
-            health_zero.addClass("player-health");
+         
         }
         if ((playerselected === true) && (opponent_in_zone === false)) {
             opponent_selected(character_zero);
-            health_zero.addClass("opponent-health");
+        
         }
     })
     character_one.click(function () {
 
         if (playerselected === false) {
             player_selected(character_one);
-            health_one.addClass("player-health");
+           
         }
         if ((playerselected === true) && (opponent_in_zone === false)) {
             opponent_selected(character_one);
-            health_one.addClass("opponent-health");
+          
         }
     })
     character_two.click(function () {
 
         if (playerselected === false) {
             player_selected(character_two);
-            health_two.addClass("player-health");
+     
         }
         if ((playerselected === true) && (opponent_in_zone === false)) {
             opponent_selected(character_two);
-            health_two.addClass("opponent-health");
+            
         }
     })
     character_three.click(function () {
 
         if (playerselected === false) {
             player_selected(character_three);
-            health_three.addClass("player-health");
+       
         }
         if ((playerselected === true) && (opponent_in_zone === false)) {
             opponent_selected(character_three);
-            health_three.addClass("opponent-health");
+          
         }
     })
 
@@ -247,4 +249,3 @@ $(document).ready(function () {
 
 
 
-//mydude.assignprofession();
