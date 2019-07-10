@@ -125,6 +125,11 @@ $(document).ready(function () {
         
 
     }
+    function update_health(a,b){
+        console.log("yo");
+        a.text("\uD83E\uDDE1 " + a.data("hp"));
+        b.text("\uD83E\uDDE1 " + b.data("hp"));
+    }
     
 
 
@@ -181,44 +186,55 @@ $(document).ready(function () {
 
         if (playerselected === false) {
             player_selected(character_zero);
+            health_zero.addClass("player-health");
         }
         if ((playerselected === true) && (opponent_in_zone === false)) {
             opponent_selected(character_zero);
+            health_zero.addClass("opponent-health");
         }
     })
     character_one.click(function () {
 
         if (playerselected === false) {
             player_selected(character_one);
+            health_one.addClass("player-health");
         }
         if ((playerselected === true) && (opponent_in_zone === false)) {
             opponent_selected(character_one);
+            health_one.addClass("opponent-health");
         }
     })
     character_two.click(function () {
 
         if (playerselected === false) {
             player_selected(character_two);
+            health_two.addClass("player-health");
         }
         if ((playerselected === true) && (opponent_in_zone === false)) {
             opponent_selected(character_two);
+            health_two.addClass("opponent-health");
         }
     })
     character_three.click(function () {
 
         if (playerselected === false) {
             player_selected(character_three);
+            health_three.addClass("player-health");
         }
         if ((playerselected === true) && (opponent_in_zone === false)) {
             opponent_selected(character_three);
+            health_three.addClass("opponent-health");
         }
     })
 
     $(".fightbutton").click(function () {
         let fighter_one = $(".player-character");
         let fighter_two = $(".picked");
+        let health_fighter_one = $(".player-health");
+        let health_fighter_two = $(".opponent-health");
         if (opponent_in_zone === true) {
             combat(fighter_one, fighter_two);
+            update_health(health_fighter_one,health_fighter_two);
         }
 
 
