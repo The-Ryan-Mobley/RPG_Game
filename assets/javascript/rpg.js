@@ -53,7 +53,7 @@ class dude {
             }
             case "cleric": {
                 this.health = 220;
-                this.attack = 10;
+                this.attack = 20;
                 this.counter_attack = 20;
                 this.pic.src = "assets/images/Dnd-3.5-cleric-209x300.jpg";
                 break;
@@ -102,14 +102,25 @@ $(document).ready(function () {
     }
 
     function combat(a, b) {
+        deal_damage(a,b);
 
+        update_health(a);
+        update_health(b);
+
+        death_conditions(a,b);
+        
+    }
+    function deal_damage(a,b){
         (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
         (a.data("stats").health) -= (b.data("stats").counter_attack);
         a.data("stats").multiplier++;
-        let a_hp = a.find(".health-text");
-        let b_hp = b.find(".health-text");
-        a_hp.text("\uD83E\uDDE1 " + a.data("stats").health);
-        b_hp.text("\uD83E\uDDE1 " + b.data("stats").health);
+    }
+    function update_health(character_object){
+        let co_hp = character_object.find(".health-text");
+        co_hp.text("\uD83E\uDDE1 " + character_object.data("stats").health);
+
+    }
+    function death_conditions(a,b){
         if((a.data("stats").health <= 0) && (b.data("stats").health <= 0)){
             a.detach();
             b.detach();
@@ -125,8 +136,6 @@ $(document).ready(function () {
             heading.text("YOU WON SELECT A NEW OPPONENT");
 
         }
-        
-
     }
     function draw_characters(index, object, object_image, element){
         
@@ -239,12 +248,8 @@ $(document).ready(function () {
         let health_fighter_two = $(".opponent-health");
         if (opponent_in_zone === true) {
             combat(fighter_one, fighter_two);
-            
         }
-
-
     });
-
 });
 
 
