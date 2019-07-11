@@ -161,7 +161,8 @@ $(document).ready(function () {
                 a.data("stats").ability_power = false;
                 update_health(a);
                 alive = false;
-            } else if (b.data("stats").health <= 0) {
+            } 
+            if (b.data("stats").health <= 0) {
                 b.detach();
                 opponent_in_zone = false;
                 heading.text("YOU WON SELECT A NEW OPPONENT");
@@ -280,7 +281,7 @@ $(document).ready(function () {
     var character_two = $("#2");
     var character_three = $("#3");
 
-    
+
     character_zero.hover(function(){
         createTooltip();
 
