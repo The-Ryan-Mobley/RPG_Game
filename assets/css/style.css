@@ -1,3 +1,35 @@
+*{
+    font-family: 'MedievalSharp', cursive;
+}
+.jumbotron{
+    background-image: url(../images/79644477-beautiful-seamless-background-realistic-texture-of-wooden-boards-hand-drawn-natural-realistic-wooden.jpg);
+    background-repeat: repeat;
+    padding-bottom: 5%;
+}
+body{
+    background-image: url(../images/dyu8dx-956f96a9-d374-454b-8d7c-d16a916cb9b8.jpg);
+    background-repeat: repeat;
+    
+}
+.jumbo-text{
+    text-align: center;
+    font-size: 500%;
+    
+    color:	#D5AD6D; /*if no support for background-clip*/
+    background: -webkit-linear-gradient(transparent, transparent),
+    -webkit-linear-gradient(top, rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+    background: -o-linear-gradient(transparent, transparent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.footer{
+    background-image: url(../images/79644477-beautiful-seamless-background-realistic-texture-of-wooden-boards-hand-drawn-natural-realistic-wooden.jpg);
+    background-repeat: repeat;
+    position: relative;
+    display:block;
+    clear:both;
+
+}
 .player-character{
     border-style:solid;
     border-color: green;
@@ -37,4 +69,7 @@
 .player-area{
     padding-bottom: 20%;
     text-align: center;
+}
+.opponent-area{
+    margin-bottom:30%;
 }

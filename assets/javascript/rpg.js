@@ -1,7 +1,7 @@
 class dude {
     constructor() {
         this.multiplier = 1;
-        this.abilit_power = true;
+        this.ability_power = true;
         this.is_player = false;
         this.health = 0;
         this.attack = 0;
@@ -117,16 +117,16 @@ $(document).ready(function () {
             (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
             a.data("stats").multiplier++;
             
-
         }
-        else if((a.data("stats").profession = "rogue") && (combat_round === 0)){
+        else if((a.data("stats").profession === "rogue") && (combat_round === 0) && (a.data("stats").ability_power === true)){
             (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier * 3));
-            console.log(a.data("stats").multiplier * 3);
+            console.log("should only be rogue");
             (a.data("stats").health) -= (b.data("stats").counter_attack);
+            a.data("stats").ability_power = false;
             a.data("stats").multiplier++;
 
         }
-        else if(a.data("stats").profession = "cleric"){
+        else if(a.data("stats").profession === "cleric"){
             (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
             (a.data("stats").health) -= Math.floor(b.data("stats").counter_attack / 2);
             a.data("stats").multiplier++;
@@ -134,7 +134,14 @@ $(document).ready(function () {
         else{
             (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
             (a.data("stats").health) -= (b.data("stats").counter_attack);
-            a.data("stats").multiplier++;
+
+            if(a.data("stats").profession === "wizard"){
+                a.data("stats").multiplier+=2;
+            }
+            else{
+                a.data("stats").multiplier++;
+            }
+            
         }
         
     }
@@ -146,12 +153,13 @@ $(document).ready(function () {
     }
 
     function death_conditions(a, b) {
-        if ((a.data("stats").profession === "fighter") && (a.data("stats").abilit_power === true)){
+        if ((a.data("stats").profession === "fighter") && (a.data("stats").ability_power === true)){
             if (a.data("stats").health <= 0){
                 a.data("stats").health = 1;
-                a.data("stats").abilit_power = false;
+                a.data("stats").ability_power = false;
                 update_health(a);
             }else if (b.data("stats").health <= 0) {
+                console.log("you ded");
                 b.detach();
                 opponent_in_zone = false;
                 heading.text("YOU WON SELECT A NEW OPPONENT");
