@@ -241,12 +241,24 @@ $(document).ready(function () {
     }
 
     function createTooltip(){  
-        let tooltip = $(".tooltip");
-        tooltip.text("Lorem ipsum dolor amet kitsch irony swag, tumblr cornhole food truck health goth. Paleo activated charcoal cliche flexitarian, chicharrones tacos pour-over man bun leggings mixtape chambray hammock sustainable cornhole. Marfa jianbing truffaut asymmetrical drinking vinegar. Hammock unicorn ramps salvia 3 wolf moon craft beer kitsch drinking vinegar selfies cardigan cray man bun selvage. Venmo shoreditch squid cornhole irony, hot chicken authentic offal organic sustainable distillery franzen yr chicharrones. Biodiesel banjo schlitz 90's cray vaporware pinterest.")
+        let tooltip = $(".tool-box");
+        console.log("textbox made");
+        
+        tooltip.html("Lorem ipsum dolor amet kitsch irony swag, tumblr cornhole food truck health goth. Paleo activated charcoal cliche flexitarian, chicharrones tacos pour-over man bun leggings mixtape chambray hammock sustainable cornhole. Marfa jianbing truffaut asymmetrical drinking vinegar. Hammock unicorn ramps salvia 3 wolf moon craft beer kitsch drinking vinegar selfies cardigan cray man bun selvage. Venmo shoreditch squid cornhole irony, hot chicken authentic offal organic sustainable distillery franzen yr chicharrones. Biodiesel banjo schlitz 90's cray vaporware pinterest.")
        
         
 
     };
+    function definetoolbox(name, obj){
+        let box ="";
+        let object_data = obj.data("stats");
+        switch(name){
+            case "fighter":{
+                box="<strong>Fighter</strong><br>Attack: " + 
+
+            }
+        }
+    }
 
 
     function reset_game() {                                                             //resets the games values and characters
@@ -286,7 +298,7 @@ $(document).ready(function () {
         createTooltip();
 
     }, function(){
-        $('.tooltip').remove();
+        $('.tool-box').empty();
         
     });
 
@@ -315,6 +327,13 @@ $(document).ready(function () {
 
         }
     });
+    character_one.hover(function(){
+        createTooltip();
+
+    }, function(){
+        $('.tool-box').empty();
+        
+    });
     character_two.click(function () {
 
         if (playerselected === false) {
@@ -326,6 +345,14 @@ $(document).ready(function () {
 
         }
     });
+    character_two.hover(function(){
+        createTooltip();
+
+    }, function(){
+        $('.tool-box').empty();
+        
+    });
+    
     character_three.click(function () {
 
         if (playerselected === false) {
@@ -336,6 +363,13 @@ $(document).ready(function () {
             opponent_selected(character_three);
 
         }
+    });
+    character_three.hover(function(){
+        createTooltip();
+
+    }, function(){
+        $('.tool-box').empty();
+        
     });
 
     $(".fightbutton").click(function () {

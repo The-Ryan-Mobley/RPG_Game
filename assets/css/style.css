@@ -76,11 +76,14 @@ body{
 }
 .infobox{
     background-color: #ffffff;
+    height:50%;
     padding:2%;
 }
-.tooltip{
+.tool-box{
     visibility: visible;
+    z-index: 1;
     background-color:#ffff;
+    color:black;
     padding:2%;
     font-size:12px;
 }
