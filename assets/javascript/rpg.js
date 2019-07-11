@@ -52,7 +52,7 @@ class dude {
                 break;
             }
             case "cleric": {
-                this.health = 220;
+                this.health = 140;
                 this.attack = 20;
                 this.counter_attack = 20;
                 this.pic.src = "assets/images/Dnd-3.5-cleric-209x300.jpg";
@@ -118,7 +118,20 @@ $(document).ready(function () {
             a.data("stats").multiplier++;
             
 
-        }else{
+        }
+        else if((a.data("stats").profession = "rogue") && (combat_round === 0)){
+            (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier * 3));
+            console.log(a.data("stats").multiplier * 3);
+            (a.data("stats").health) -= (b.data("stats").counter_attack);
+            a.data("stats").multiplier++;
+
+        }
+        else if(a.data("stats").profession = "cleric"){
+            (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
+            (a.data("stats").health) -= Math.floor(b.data("stats").counter_attack / 2);
+            a.data("stats").multiplier++;
+        }
+        else{
             (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
             (a.data("stats").health) -= (b.data("stats").counter_attack);
             a.data("stats").multiplier++;
