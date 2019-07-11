@@ -21,6 +21,7 @@ body{
     background: -o-linear-gradient(transparent, transparent);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+   
 }
 .footer{
     background-image: url(../images/79644477-beautiful-seamless-background-realistic-texture-of-wooden-boards-hand-drawn-natural-realistic-wooden.jpg);
@@ -72,4 +73,14 @@ body{
 }
 .opponent-area{
     margin-bottom:30%;
+}
+.infobox{
+    background-color: #ffffff;
+    padding:2%;
+}
+.tooltip{
+    visibility: visible;
+    background-color:#ffff;
+    padding:2%;
+    font-size:12px;
 }
