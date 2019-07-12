@@ -22,42 +22,42 @@ $(document).ready(function () {
                     this.health = 190;
                     this.attack = 40;
                     this.counter_attack = 30;
-                    this.pic.src = "assets/images/Tordek.jpg";
+                    this.pic.src = "assets/images/dd-fighter-quest-ideas.png";
                     break;
                 }
                 case "wizard": {
                     this.health = 120;
                     this.attack = 50;
                     this.counter_attack = 30;
-                    this.pic.src = "assets/images/dnd-wizard.jpg";
+                    this.pic.src = "assets/images/636274643818663058.png";
                     break;
                 }
                 case "warlock": {
                     this.health = 140;
                     this.attack = 60;
                     this.counter_attack = 60;
-                    this.pic.src = "assets/images/c1034.png";
+                    this.pic.src = "assets/images/Farideh.png";
                     break;
                 }
                 case "rogue": {
                     this.health = 140;
                     this.attack = 30;
                     this.counter_attack = 50;
-                    this.pic.src = "assets/images/Arcane_trickster_wand.jpg";
+                    this.pic.src = "assets/images/636272820319276620.png";
                     break;
                 }
                 case "ranger": {
                     this.health = 180;
                     this.attack = 40;
                     this.counter_attack = 40;
-                    this.pic.src = "assets/images/dnd-class-ranger-195x300.png";
+                    this.pic.src = "assets/images/drawing-elves-archer-16.png";
                     break;
                 }
                 case "cleric": {
                     this.health = 140;
                     this.attack = 20;
                     this.counter_attack = 20;
-                    this.pic.src = "assets/images/Dnd-3.5-cleric-209x300.jpg";
+                    this.pic.src = "assets/images/So+you+want+to+make+a+dnd+cleric+_c96d47ecea5663db1a12833a9a5d3173.png";
                     break;
                 }
             }
@@ -119,18 +119,18 @@ $(document).ready(function () {
 
     }
 
-    function deal_damage(a, b) {
-        if ((combat_round === 0) && (a.data("stats").profession === "ranger")) {
+    function deal_damage(a, b) { 
+        if ((combat_round === 0) && (a.data("stats").profession === "ranger")) {      //checks for ranger ability
             (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
             a.data("stats").multiplier++;
 
-        } else if ((a.data("stats").profession === "rogue") && (combat_round === 0) && (a.data("stats").ability_power === true)) {
+        } else if ((a.data("stats").profession === "rogue") && (combat_round === 0) && (a.data("stats").ability_power === true)) {  //makes rogues' ability a onetime use
             (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier * 3));
             (a.data("stats").health) -= (b.data("stats").counter_attack);
             a.data("stats").ability_power = false;
             a.data("stats").multiplier++;
 
-        } else if (a.data("stats").profession === "cleric") {
+        } else if (a.data("stats").profession === "cleric") {                                           //cleric ability
             (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
             (a.data("stats").health) -= Math.floor(b.data("stats").counter_attack / 2);
             a.data("stats").multiplier++;
@@ -138,10 +138,13 @@ $(document).ready(function () {
             (b.data("stats").health) -= Math.floor((a.data("stats").attack) * (a.data("stats").multiplier));
             (a.data("stats").health) -= (b.data("stats").counter_attack);
 
-            if (a.data("stats").profession === "wizard") {
+            if (a.data("stats").profession === "wizard") {                                                 //wizard multiplier
                 a.data("stats").multiplier += 1.5;
-            } else if(a.data("stats").profession == "warlock") {
+            } else if(a.data("stats").profession == "warlock") {                                            //warlock multiplier
                 a.data("stats").multiplier += 0.5;
+            }
+            else{
+                a.data("stats").multiplier++;
             }
 
         }
@@ -163,7 +166,7 @@ $(document).ready(function () {
                 alive = false;
             } 
             if (b.data("stats").health <= 0) {
-                b.detach();
+                b.remove();
                 opponent_in_zone = false;
                 heading.text("YOU WON SELECT A NEW OPPONENT");
                 combat_round = 0;
@@ -172,25 +175,28 @@ $(document).ready(function () {
             }
         } else {
             if ((a.data("stats").health <= 0) && (b.data("stats").health <= 0)) {
-                a.detach();
-                b.detach();
+                a.remove();
+                b.remove();
                 heading.text("YOU DIED PRESS R TO RESTART");
                 combat_round = 0;
                 bested++;
                 alive = false;
             } else if (a.data("stats").health <= 0) {
-                a.detach();
+                a.remove();
                 heading.text("YOU DIED PRESS R TO RESTART");
                 combat_round = 0;
                 alive = false;
             } else if (b.data("stats").health <= 0) {
-                b.detach();
+                b.remove();
                 opponent_in_zone = false;
                 heading.text("YOU WON SELECT A NEW OPPONENT");
                 combat_round = 0;
                 bested++;
 
             }
+        }
+        if(bested >= 3){
+            heading.text("YOU ARE THE CHAMPION! PRESS R TO PLAY AGAIN");
         }
     }
 
@@ -204,11 +210,10 @@ $(document).ready(function () {
         generate_pic(object_image, characterholder, character);
 
         draw_stats(characterholder, object.health, object.attack, object.counter_attack);
-
-    }
-    function draw_after_reset(index, object, object_image, element){
         
     }
+   
+    
 
     function generate_container(holder, index, element, object) {
         holder.addClass("characterholder not-player");
@@ -216,10 +221,13 @@ $(document).ready(function () {
         holder.appendTo(element);
         holder.data("stats", object);
 
+
     }
 
+
     function generate_pic(object_image, holder, character) {
-        character.addClass("img-fluid ");
+        character.removeClass("img-flud");  //removal for reset
+        character.addClass("img-fluid");
         character.attr("src", object_image.src);
         character.width(150);
         character.height(150);
@@ -322,24 +330,7 @@ $(document).ready(function () {
     }
 
 
-    function reset_game() {                                                             //resets the games values and characters
-        $(".player-area").empty();
-        $(".opponent-area").empty();
-        heading.text("CHOOSE YOUR CHARACTER");
-        character_zero.remove();
-        character_one.remove();
-        character_two.remove();
-        character_three.remove();
-        playerpicked = false;
-        opponent_in_zone = false;
-        alive = true;
-        dudelist = [];
-        combat_round = 0;
-        bested = 0;
-        drawloop();
-        
-
-    }
+    
 
     //*******************************************************************program starts****************************************************************************************** */
     drawloop();
@@ -356,9 +347,9 @@ $(document).ready(function () {
     var character_three = $("#3");
 
 
-    character_zero.hover(function(){
+    $("#0").hover(function(){
        
-        createTooltip(character_zero);
+        createTooltip($("#0"));
 
     }, function(){
         $('.tool-box').empty();
@@ -448,7 +439,11 @@ $(document).ready(function () {
     document.onkeypress = function(event){
         let key = event.key.toLowerCase();
         if((alive === false) && (key === 'r')){
-            reset_game();
+            window.location.reload();
+            
+        }
+        if(bested >= 3){
+            window.location.reload();
         }
 
     }
