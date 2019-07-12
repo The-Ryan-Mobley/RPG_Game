@@ -13,8 +13,8 @@ $(document).ready(function () {
             this.pic = new Image();
             this.assignprofession();
         }
-        assignprofession() {
-            var list = ["fighter", "wizard", "rogue", "ranger", "warlock", "cleric"];
+        assignprofession() {                                                              //grabs a class name from the array and generates their stats based off of it
+            var list = ["fighter", "wizard", "rogue", "ranger", "warlock", "cleric"]; 
             this.profession = list[Math.floor(Math.random() * list.length)];
 
             switch (this.profession.toLowerCase()) {
@@ -151,13 +151,13 @@ $(document).ready(function () {
 
     }
 
-    function update_health(character_object) {
+    function update_health(character_object) {                                                                      //draws health after combat
         let co_hp = character_object.find(".health-text");
         co_hp.text("\uD83E\uDDE1 " + character_object.data("stats").health);
 
     }
 
-    function death_conditions(a, b) {
+    function death_conditions(a, b) {                                                                      //checks for player/opponent death and handles warrior ability
         if ((a.data("stats").profession === "fighter") && (a.data("stats").ability_power === true)) {
             if (a.data("stats").health <= 0) {
                 a.data("stats").health = 1;
@@ -209,7 +209,7 @@ $(document).ready(function () {
         var character = $('<img>'); //character images
         generate_pic(object_image, characterholder, character);
 
-        draw_stats(characterholder, object.health, object.attack, object.counter_attack);
+        draw_stats(characterholder, object.health, object.attack, object.counter_attack); 
         
     }
    
@@ -251,7 +251,7 @@ $(document).ready(function () {
 
     }
 
-    function createTooltip(obj){  
+    function createTooltip(obj){                                                    //character descriptions that show up when you mouse over them
         let tooltip = $(".tool-box");
         let helptext = definetoolbox(obj)
         tooltip.html(helptext);
@@ -279,7 +279,7 @@ $(document).ready(function () {
                 box="<strong>Wizard</strong><br>Health: " 
                 + object_data.health + "<br>Attack: " + object_data.attack 
                 + "<br>Counter: " + object_data.counter_attack + "<br><strong>Ability: Arcane Mastery</strong>"
-                + "<br>The Wizard has devoted his life to the arcane arts, making his power all the more potent." 
+                + "<br>The Wizard has devoted their life to the arcane arts, making their power all the more potent." 
                 + "Players who select the wizard will have their damage multiplier increase fifty percent faster than other classes.<br> The"  
                 + "wizard has high damage output, but low health. build your multiplier on higher health enemies like the cleric who cant "
                 +"do serious damage in a few hits";
@@ -290,7 +290,7 @@ $(document).ready(function () {
                 box="<strong>Ranger</strong><br>Health: " 
                 + object_data.health + "<br>Attack: " + object_data.attack 
                 + "<br>Counter: " + object_data.counter_attack + "<br><strong>Ability: Marksman</strong>"
-                + "<br>The Ranger is a master huntsman. capable of picking off targets from a sitance " 
+                + "<br>The Ranger is a master hunter. capable of picking off targets from a distance " 
                 + "Players who pick the ranger will ignore counter damage on the first combat round<br> The"  
                 + "ranger is great for picking off lower health classes like the wizard or warlock early.";
                 break;
@@ -340,13 +340,13 @@ $(document).ready(function () {
     heading.appendTo(toptext);
 
 
-    var character_zero = $("#0");
+    var character_zero = $("#0"); //each character
     var character_one = $("#1");
     var character_two = $("#2");
     var character_three = $("#3");
 
-
-    $("#0").hover(function(){
+                                                                                    //controls for player / enemy selection and hover over tooltips
+    $("#0").hover(function(){     
        
         createTooltip($("#0"));
 
@@ -425,7 +425,7 @@ $(document).ready(function () {
         
     });
 
-    $(".fightbutton").click(function () {
+    $(".fightbutton").click(function () {                                                               //button controls combat
         let fighter_one = $(".player-character");
         let fighter_two = $(".picked");
 
@@ -435,7 +435,7 @@ $(document).ready(function () {
             
         }
     });
-    document.onkeypress = function(event){
+    document.onkeypress = function(event){                                                              //reset on win / loss
         let key = event.key.toLowerCase();
         if((alive === false) && (key === 'r')){
             window.location.reload();
