@@ -240,24 +240,55 @@ $(document).ready(function () {
 
     }
 
-    function createTooltip(){  
+    function createTooltip(obj){  
         let tooltip = $(".tool-box");
         console.log("textbox made");
-        
-        tooltip.html("Lorem ipsum dolor amet kitsch irony swag, tumblr cornhole food truck health goth. Paleo activated charcoal cliche flexitarian, chicharrones tacos pour-over man bun leggings mixtape chambray hammock sustainable cornhole. Marfa jianbing truffaut asymmetrical drinking vinegar. Hammock unicorn ramps salvia 3 wolf moon craft beer kitsch drinking vinegar selfies cardigan cray man bun selvage. Venmo shoreditch squid cornhole irony, hot chicken authentic offal organic sustainable distillery franzen yr chicharrones. Biodiesel banjo schlitz 90's cray vaporware pinterest.")
+        let helptext = definetoolbox(obj)
+        tooltip.html(helptext);
        
         
 
     };
-    function definetoolbox(name, obj){
+    function definetoolbox(obj){
         let box ="";
         let object_data = obj.data("stats");
+        let name = object_data.profession;
         switch(name){
             case "fighter":{
-                box="<strong>Fighter</strong><br>Attack: " + 
+                box="<strong>Fighter</strong><br>Health: " 
+                + object_data.health + "<br>Attack: " + object_data.attack 
+                + "<br>Counter: " + object_data.counter + "<br><strong>Ability: Endurance</strong>"
+                + "<br>Over a long career of battle the warrior has developed an almost supernatural endurance," 
+                + "shrugging off blows that would kill a mortal man The first time the player's health reaches zero" 
+                + "they drop to one health instead.<br> The"  
+                + "fighters high base stats makes them well rounded with decent staying power. endurance lets you "
+                +"take on higher damage classes like the wizard more safely later.";
+                break;
+            }
+            case "wizard":{
+                box="<strong>Wizard</strong><br>Health: " 
+                + object_data.health + "<br>Attack: " + object_data.attack 
+                + "<br>Counter: " + object_data.counter + "<br><strong>Ability: Magical Affinity</strong>"
+                + "<br>The Wizard has devoted his life to the arcane arts, making his power all the more potent." 
+                + "Players who select the wizard will have their damage multiplier increase twice has fast as other classes.<br> The"  
+                + "wizard has high damage output, but low health. build your multiplier on higher health enemies like the cleric who cant "
+                +"do serious damage in a few hits";
+                break;
+                
+            }
+            case "ranger":{
+                box="<strong>Ranger</strong><br>Health: " 
+                + object_data.health + "<br>Attack: " + object_data.attack 
+                + "<br>Counter: " + object_data.counter + "<br><strong>Ability: Marksman</strong>"
+                + "<br>The Ranger is a master huntsman, capable of stalking prey for miles; waiting until the moment " 
+                + "is right to deliver a final strike. Players who pick the ranger will ignore counter damage on the first combat round<br> The"  
+                + "wizard has high damage output, but low health. build your multiplier on higher health enemies like the cleric who cant "
+                +"do serious damage in a few hits";
+                break;
 
             }
         }
+        return box;
     }
 
 
@@ -295,7 +326,7 @@ $(document).ready(function () {
 
 
     character_zero.hover(function(){
-        createTooltip();
+        createTooltip(character_zero);
 
     }, function(){
         $('.tool-box').empty();
@@ -328,7 +359,7 @@ $(document).ready(function () {
         }
     });
     character_one.hover(function(){
-        createTooltip();
+        createTooltip(character_one);
 
     }, function(){
         $('.tool-box').empty();
@@ -346,7 +377,7 @@ $(document).ready(function () {
         }
     });
     character_two.hover(function(){
-        createTooltip();
+        createTooltip(character_two);
 
     }, function(){
         $('.tool-box').empty();
@@ -365,7 +396,7 @@ $(document).ready(function () {
         }
     });
     character_three.hover(function(){
-        createTooltip();
+        createTooltip(character_three);
 
     }, function(){
         $('.tool-box').empty();
