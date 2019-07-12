@@ -2,6 +2,7 @@
     font-family: 'MedievalSharp', cursive;
 }
 .announcer{
+    font-size:60px;
     text-align: center;
 }
 .jumbotron{
@@ -20,7 +21,7 @@ body{
     
     color:	#D5AD6D; /*if no support for background-clip*/
     background: -webkit-linear-gradient(transparent, transparent),
-    -webkit-linear-gradient(top, rgba(213,173,109,1) 0%, rgba(213,173,109,1) 26%, rgba(226,186,120,1) 35%, rgba(163,126,67,1) 45%, rgba(145,112,59,1) 61%, rgba(213,173,109,1) 100%);
+    -webkit-linear-gradient(top, #f5d96c 0%, #f5d96c 26%, #f7de79 35%, #a37e43 45%, #91703b 61%, #d5ad6d 100%);
     background: -o-linear-gradient(transparent, transparent);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -53,22 +54,28 @@ body{
     position:relative;
     float:left;
     padding-right:1%;
-    bottom:10%;
+    bottom:15%;
     left:1%;
+    color: #259c1a;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 .attack-text{
     position:relative;
     float:left;
     padding-right:1%;
-    bottom:10%;
+    bottom:15%;
+    color:#fc3232;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     
 }
 .counter-text{
     position: relative;
     float:left;
     padding-right:1%;
-    bottom:10%;
+    bottom:15%;
     right:1%;
+    color:#122bb8;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 .player-area{
     padding-bottom: 20%;
@@ -79,15 +86,50 @@ body{
     padding-top:4%;
 }
 .infobox{
-    background-color: #ffffff;
-    height:250px;
+    border-style: groove;
+    border-color:#472314;
+    border-width:1%;
+    
+    background-image: url(../images/paper-old-texture-parchment-thumb.jpg);
+    height:15em;
     padding:2%;
 }
 .tool-box{
-    visibility: visible;
-    z-index: 1;
-    background-color:#ffff;
     color:black;
     padding:2%;
     font-size:12px;
+}
+.footer{
+    text-align: center;
+}
+.footertext{
+    font-size: 24px;
+    text-align: center;
+    color:	#D5AD6D; /*if no support for background-clip*/
+    background: -webkit-linear-gradient(transparent, transparent),
+    -webkit-linear-gradient(top, #d5ad6d 0%, #d5ad6d 26%, #e2ba78 35%, #a37e43 45%, #91703b 61%, #d5ad6d 100%);
+    background: -o-linear-gradient(transparent, transparent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+}
+@media only screen and (max-width: 575px) {
+    *{
+        max-width: 575px;
+    }
+    .player-area{
+        padding-bottom: 25%;
+    }
+    .infobox{
+        height:23em;
+    }
+}
+@media only screen and (max-width: 768px) {
+    *{
+        max-width: 768px;
+    }
+    .infobox{
+        height:20em;
+    }
+
 }
