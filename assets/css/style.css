@@ -1,6 +1,9 @@
 *{
     font-family: 'MedievalSharp', cursive;
 }
+.announcer{
+    text-align: center;
+}
 .jumbotron{
     background-image: url(../images/79644477-beautiful-seamless-background-realistic-texture-of-wooden-boards-hand-drawn-natural-realistic-wooden.jpg);
     background-repeat: repeat;
@@ -73,10 +76,11 @@ body{
 }
 .opponent-area{
     margin-bottom:30%;
+    padding-top:4%;
 }
 .infobox{
     background-color: #ffffff;
-    height:50%;
+    height:250px;
     padding:2%;
 }
 .tool-box{

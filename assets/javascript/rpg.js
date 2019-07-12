@@ -20,7 +20,7 @@ $(document).ready(function () {
             switch (this.profession.toLowerCase()) {
                 case "fighter": {
                     this.health = 190;
-                    this.attack = 30;
+                    this.attack = 40;
                     this.counter_attack = 30;
                     this.pic.src = "assets/images/Tordek.jpg";
                     break;
@@ -28,12 +28,12 @@ $(document).ready(function () {
                 case "wizard": {
                     this.health = 120;
                     this.attack = 50;
-                    this.counter = 30;
+                    this.counter_attack = 30;
                     this.pic.src = "assets/images/dnd-wizard.jpg";
                     break;
                 }
                 case "warlock": {
-                    this.health = 160;
+                    this.health = 140;
                     this.attack = 60;
                     this.counter_attack = 60;
                     this.pic.src = "assets/images/c1034.png";
@@ -71,7 +71,7 @@ $(document).ready(function () {
     var heading = $("<h1>");
     var spawn = $(".player-area");
     var pool = $(".opponent-area");
-    var playerselected = false;
+    var playerpicked = false;
     var opponent_in_zone = false;
     var dudelist = [];
     var combat_round = 0;
@@ -82,7 +82,7 @@ $(document).ready(function () {
     function player_selected(element) {                         //function for picking player character and opponents
 
         element.data("stats").is_player = true;
-        playerselected = true;
+        playerpicked = true;
         element.removeClass("not-player");
         element.addClass("player-character");
         var opponent = $(".not-player").detach();
@@ -135,13 +135,13 @@ $(document).ready(function () {
             (a.data("stats").health) -= Math.floor(b.data("stats").counter_attack / 2);
             a.data("stats").multiplier++;
         } else {
-            (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
+            (b.data("stats").health) -= Math.floor((a.data("stats").attack) * (a.data("stats").multiplier));
             (a.data("stats").health) -= (b.data("stats").counter_attack);
 
             if (a.data("stats").profession === "wizard") {
-                a.data("stats").multiplier += 2;
-            } else {
-                a.data("stats").multiplier++;
+                a.data("stats").multiplier += 1.5;
+            } else if(a.data("stats").profession == "warlock") {
+                a.data("stats").multiplier += 0.5;
             }
 
         }
@@ -206,6 +206,9 @@ $(document).ready(function () {
         draw_stats(characterholder, object.health, object.attack, object.counter_attack);
 
     }
+    function draw_after_reset(index, object, object_image, element){
+        
+    }
 
     function generate_container(holder, index, element, object) {
         holder.addClass("characterholder not-player");
@@ -257,7 +260,7 @@ $(document).ready(function () {
             case "fighter":{
                 box="<strong>Fighter</strong><br>Health: " 
                 + object_data.health + "<br>Attack: " + object_data.attack 
-                + "<br>Counter: " + object_data.counter + "<br><strong>Ability: Endurance</strong>"
+                + "<br>Counter: " + object_data.counter_attack + "<br><strong>Ability: Endurance</strong>"
                 + "<br>Over a long career of battle the warrior has developed an almost supernatural endurance," 
                 + "shrugging off blows that would kill a mortal man The first time the player's health reaches zero" 
                 + "they drop to one health instead.<br> The"  
@@ -268,9 +271,9 @@ $(document).ready(function () {
             case "wizard":{
                 box="<strong>Wizard</strong><br>Health: " 
                 + object_data.health + "<br>Attack: " + object_data.attack 
-                + "<br>Counter: " + object_data.counter + "<br><strong>Ability: Magical Affinity</strong>"
+                + "<br>Counter: " + object_data.counter_attack + "<br><strong>Ability: Arcane Mastery</strong>"
                 + "<br>The Wizard has devoted his life to the arcane arts, making his power all the more potent." 
-                + "Players who select the wizard will have their damage multiplier increase twice has fast as other classes.<br> The"  
+                + "Players who select the wizard will have their damage multiplier increase fifty percent faster than other classes.<br> The"  
                 + "wizard has high damage output, but low health. build your multiplier on higher health enemies like the cleric who cant "
                 +"do serious damage in a few hits";
                 break;
@@ -279,13 +282,40 @@ $(document).ready(function () {
             case "ranger":{
                 box="<strong>Ranger</strong><br>Health: " 
                 + object_data.health + "<br>Attack: " + object_data.attack 
-                + "<br>Counter: " + object_data.counter + "<br><strong>Ability: Marksman</strong>"
-                + "<br>The Ranger is a master huntsman, capable of stalking prey for miles; waiting until the moment " 
-                + "is right to deliver a final strike. Players who pick the ranger will ignore counter damage on the first combat round<br> The"  
-                + "wizard has high damage output, but low health. build your multiplier on higher health enemies like the cleric who cant "
-                +"do serious damage in a few hits";
+                + "<br>Counter: " + object_data.counter_attack + "<br><strong>Ability: Marksman</strong>"
+                + "<br>The Ranger is a master huntsman. capable of picking off targets from a sitance " 
+                + "Players who pick the ranger will ignore counter damage on the first combat round<br> The"  
+                + "ranger is great for picking off lower health classes like the wizard or warlock early.";
+                break;
+            }
+            case "rogue":{
+                box="<strong>Rogue</strong><br>Health: " 
+                + object_data.health + "<br>Attack: " + object_data.attack 
+                + "<br>Counter: " + object_data.counter_attack + "<br><strong>Ability: Backstab</strong>"
+                + "<br>The Rogue is most at home in the shadows, waiting until their target least excpects them to deliver a " 
+                + "final strike. Players who pick the rogue will deall three times their normal damage on the first attack of the game.<br>"  
+                + "The rogue has low health but deals damage very quickly.";
                 break;
 
+            }
+            case "cleric":{
+                box="<strong>Cleric</strong><br>Health: " 
+                + object_data.health + "<br>Attack: " + object_data.attack 
+                + "<br>Counter: " + object_data.counter_attack + "<br><strong>Ability: Divine Shield</strong>"
+                + "<br>The Cleric has devoted their life to their god. As a result they can channel their faith" 
+                + " into a protective shield around themself. Players who pick the cleric will take half damage from enemy counter attacks<br>"  
+                + "The cleric's ability allows them to take a lot of damage. Take advantage of this by building your multiplier on higher health classes like the warrior";
+                break;
+
+            }
+            case "warlock":{
+                box="<strong>Warlock</strong><br>Health: " 
+                + object_data.health + "<br>Attack: " + object_data.attack 
+                + "<br>Counter: " + object_data.counter_attack + "<br><strong>Ability: Infernal Pact</strong>"
+                + "<br>Long ago the Warlock made a pact with an evil entity for power. Though their might is great they have little control over their abilities." 
+                + "Players who pick warlock will have high base damage, but their damage multiplier is halved<br>"  
+                + "due to the warlocks high stats you might want to pick them just so you dont have to fight one";
+                break;
             }
         }
         return box;
@@ -296,17 +326,18 @@ $(document).ready(function () {
         $(".player-area").empty();
         $(".opponent-area").empty();
         heading.text("CHOOSE YOUR CHARACTER");
-        $("#0").remove();
-        $("#1").remove();
-        $("#2").remove();
-        $("#3").remove();
-        playerselected = false;
+        character_zero.remove();
+        character_one.remove();
+        character_two.remove();
+        character_three.remove();
+        playerpicked = false;
         opponent_in_zone = false;
         alive = true;
         dudelist = [];
         combat_round = 0;
         bested = 0;
         drawloop();
+        
 
     }
 
@@ -326,6 +357,7 @@ $(document).ready(function () {
 
 
     character_zero.hover(function(){
+       
         createTooltip(character_zero);
 
     }, function(){
@@ -336,11 +368,11 @@ $(document).ready(function () {
 
     character_zero.click(function () {
 
-        if (playerselected === false) {
+        if (playerpicked === false) {
             player_selected(character_zero);
 
         }
-        if ((playerselected === true) && (opponent_in_zone === false)) {
+        if ((playerpicked === true) && (opponent_in_zone === false)) {
             opponent_selected(character_zero);
 
         }
@@ -349,11 +381,11 @@ $(document).ready(function () {
 
     character_one.click(function () {
 
-        if (playerselected === false) {
+        if (playerpicked === false) {
             player_selected(character_one);
 
         }
-        if ((playerselected === true) && (opponent_in_zone === false)) {
+        if ((playerpicked === true) && (opponent_in_zone === false)) {
             opponent_selected(character_one);
 
         }
@@ -367,11 +399,11 @@ $(document).ready(function () {
     });
     character_two.click(function () {
 
-        if (playerselected === false) {
+        if (playerpicked === false) {
             player_selected(character_two);
 
         }
-        if ((playerselected === true) && (opponent_in_zone === false)) {
+        if ((playerpicked === true) && (opponent_in_zone === false)) {
             opponent_selected(character_two);
 
         }
@@ -386,11 +418,11 @@ $(document).ready(function () {
     
     character_three.click(function () {
 
-        if (playerselected === false) {
+        if (playerpicked === false) {
             player_selected(character_three);
 
         }
-        if ((playerselected === true) && (opponent_in_zone === false)) {
+        if ((playerpicked === true) && (opponent_in_zone === false)) {
             opponent_selected(character_three);
 
         }
