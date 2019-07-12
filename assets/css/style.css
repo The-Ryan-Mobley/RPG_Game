@@ -118,7 +118,7 @@ body{
         max-width: 575px;
     }
     .infobox{
-        height:23em;
+        height:25em;
     }
 }
 @media only screen and (max-width: 768px) {
