@@ -253,7 +253,6 @@ $(document).ready(function () {
 
     function createTooltip(obj){  
         let tooltip = $(".tool-box");
-        console.log("textbox made");
         let helptext = definetoolbox(obj)
         tooltip.html(helptext);
        
@@ -433,7 +432,7 @@ $(document).ready(function () {
         if (opponent_in_zone === true) {
             combat(fighter_one, fighter_two);
             combat_round++;
-            //console.log(combat_round);
+            
         }
     });
     document.onkeypress = function(event){
@@ -442,7 +441,7 @@ $(document).ready(function () {
             window.location.reload();
             
         }
-        if(bested >= 3){
+        if((bested >= 3) && (alive === true)){
             window.location.reload();
         }
 

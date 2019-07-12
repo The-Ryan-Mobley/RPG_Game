@@ -117,9 +117,6 @@ body{
     *{
         max-width: 575px;
     }
-    .player-area{
-        padding-bottom: 25%;
-    }
     .infobox{
         height:23em;
     }
@@ -127,6 +124,9 @@ body{
 @media only screen and (max-width: 768px) {
     *{
         max-width: 768px;
+    }
+    .player-area{
+        padding-bottom: 25%;
     }
     .infobox{
         height:20em;
