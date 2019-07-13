@@ -56,7 +56,7 @@ $(document).ready(function () {
                 case "cleric": {
                     this.health = 140;
                     this.attack = 20;
-                    this.counter_attack = 20;
+                    this.counter_attack = 40;
                     this.pic.src = "assets/images/So+you+want+to+make+a+dnd+cleric+_c96d47ecea5663db1a12833a9a5d3173.png";
                     break;
                 }
@@ -134,7 +134,8 @@ $(document).ready(function () {
             (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
             (a.data("stats").health) -= Math.floor(b.data("stats").counter_attack / 2);
             a.data("stats").multiplier++;
-        } else {
+        } 
+        else {
             (b.data("stats").health) -= Math.floor((a.data("stats").attack) * (a.data("stats").multiplier));
             (a.data("stats").health) -= (b.data("stats").counter_attack);
 
