@@ -180,7 +180,6 @@ $(document).ready(function () {
                 b.remove();
                 heading.text("YOU DIED PRESS R TO RESTART");
                 combat_round = 0;
-                bested++;
                 alive = false;
             } else if (a.data("stats").health <= 0) {
                 a.remove();
