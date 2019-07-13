@@ -19,7 +19,7 @@ $(document).ready(function () {
 
             switch (this.profession.toLowerCase()) {
                 case "fighter": {
-                    this.health = 190;
+                    this.health = 200;
                     this.attack = 40;
                     this.counter_attack = 30;
                     this.pic.src = "assets/images/dd-fighter-quest-ideas.png";
@@ -40,14 +40,14 @@ $(document).ready(function () {
                     break;
                 }
                 case "rogue": {
-                    this.health = 140;
+                    this.health = 160;
                     this.attack = 30;
                     this.counter_attack = 50;
                     this.pic.src = "assets/images/636272820319276620.png";
                     break;
                 }
                 case "ranger": {
-                    this.health = 180;
+                    this.health = 150;
                     this.attack = 40;
                     this.counter_attack = 40;
                     this.pic.src = "assets/images/drawing-elves-archer-16.png";
@@ -120,7 +120,7 @@ $(document).ready(function () {
     }
 
     function deal_damage(a, b) { 
-        if ((combat_round === 0) && (a.data("stats").profession === "ranger")) {      //checks for ranger ability
+        if ((combat_round === 1) && (a.data("stats").profession === "ranger")) {      //checks for ranger ability
             (b.data("stats").health) -= ((a.data("stats").attack) * (a.data("stats").multiplier));
             a.data("stats").multiplier++;
 
@@ -430,9 +430,8 @@ $(document).ready(function () {
         let fighter_two = $(".picked");
 
         if (opponent_in_zone === true) {
-            combat(fighter_one, fighter_two);
             combat_round++;
-            
+            combat(fighter_one, fighter_two);
         }
     });
     document.onkeypress = function(event){                                                              //reset on win / loss
