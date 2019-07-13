@@ -48,7 +48,7 @@ $(document).ready(function () {
                 }
                 case "ranger": {
                     this.health = 150;
-                    this.attack = 40;
+                    this.attack = 20;
                     this.counter_attack = 40;
                     this.pic.src = "assets/images/drawing-elves-archer-16.png";
                     break;
