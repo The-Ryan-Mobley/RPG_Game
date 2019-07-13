@@ -78,12 +78,12 @@ body{
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 .player-area{
-    padding-bottom: 20%;
+    padding-bottom: 15%;
     text-align: center;
 }
 .opponent-area{
     margin-bottom:30%;
-    padding-top:4%;
+    padding-top:1%;
 }
 .infobox{
     border-style: groove;
