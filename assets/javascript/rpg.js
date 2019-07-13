@@ -55,7 +55,7 @@ $(document).ready(function () {
                 }
                 case "cleric": {
                     this.health = 140;
-                    this.attack = 20;
+                    this.attack = 25;
                     this.counter_attack = 40;
                     this.pic.src = "assets/images/So+you+want+to+make+a+dnd+cleric+_c96d47ecea5663db1a12833a9a5d3173.png";
                     break;
