@@ -113,23 +113,3 @@ body{
     -webkit-text-fill-color: transparent;
     
 }
-@media only screen and (max-width: 575px) {
-    *{
-        max-width: 575px;
-    }
-    .infobox{
-        height:25em;
-    }
-}
-@media only screen and (max-width: 768px) {
-    *{
-        max-width: 768px;
-    }
-    .player-area{
-        padding-bottom: 25%;
-    }
-    .infobox{
-        height:20em;
-    }
-
-}
