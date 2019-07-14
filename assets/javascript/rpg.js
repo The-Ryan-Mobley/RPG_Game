@@ -42,21 +42,21 @@ $(document).ready(function () {
                 case "rogue": {
                     this.health = 160;
                     this.attack = 30;
-                    this.counter_attack = 50;
+                    this.counter_attack = 40;
                     this.pic.src = "assets/images/636272820319276620.png";
                     break;
                 }
                 case "ranger": {
                     this.health = 150;
                     this.attack = 30;
-                    this.counter_attack = 40;
+                    this.counter_attack = 30;
                     this.pic.src = "assets/images/drawing-elves-archer-16.png";
                     break;
                 }
                 case "cleric": {
                     this.health = 140;
                     this.attack = 25;
-                    this.counter_attack = 40;
+                    this.counter_attack = 30;
                     this.pic.src = "assets/images/So+you+want+to+make+a+dnd+cleric+_c96d47ecea5663db1a12833a9a5d3173.png";
                     break;
                 }
