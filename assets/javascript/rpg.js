@@ -26,7 +26,7 @@ $(document).ready(function () {
                     break;
                 }
                 case "wizard": {
-                    this.health = 120;
+                    this.health = 130;
                     this.attack = 50;
                     this.counter_attack = 30;
                     this.pic.src = "assets/images/636274643818663058.png";
